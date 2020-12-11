@@ -1,0 +1,37 @@
+#
+# General Electric Edge Compute De-centralised Subscription
+#
+# Author: A. Yasuda
+#
+
+language: cpp
+sudo: required
+compiler:
+- clang
+os:
+- linux
+dist: bionic
+
+before_install:
+
+script:
+- eval "$(curl -sL https://raw.githubusercontent.com/travis-ci/gimme/master/gimme | GIMME_GO_VERSION=1.13 bash)"
+- mkdir build && cd build
+- cmake ./../ && make && ls -la ./test && make install
+- ./install/bin/libra & curl localhost:8080/index
+   
+before_deploy:
+deploy:
+after_deploy:
+
+notifications:
+  slack:
+    rooms:
+      secure: ki6TV2gi6KbOZpR+EW2x4jJWbGE+/48LlCttKYQrANVfPfihM8x144lUmPSI5k+XBGaqESJks4g0Lzk+wiHAt0xupkxiqaLbbem/esmUoVgQmF0pxC4hACi49yalcJmopg7KogsuutLPJweSpgT+bHrw4h0YSj8n4RGgthRTEW5PGIDV0DNK/n6sk2Kav7wlOuwHW3FijtTmj+BulOQpnr+KmXN9USY+MfPhDlldUtZp+2B9eX2/sChuTbgevitSz2QiYuf4BIyC2tBpbuLMNM7vps1yORrp8l0NkV1GorX1f2hCyQnK47/Y0EH7WePTgvDz48vDMcHLBF7hPdSaoLcxQPTRKrKA6yu8JPaMvmiirTOy8Z+Uz/Vqjme6pL3LHzyPFr23z3M82Trn7bRb4tT09cv0umpOy8uQW7MWSh9kwPYo9Y5eQg6RyeUPOjIIl+x1eB3T3G/xULGtZGqLlrIOYfI8ZwfBqamrnYQQtWtiky3gPK8m5JCeR4Adr9ZiNWYxXmW9yWNNZ8Rm+rgBng+AgqyT05wlVMHpnYaiqBM1EpNHSEQNA8tgWBdARZ1RZRjr6Fk9QMB32TKTriZAjTHl/oDj10oB2KvLsVNerKy9mFdeGNUtmojo4QEwDpn9D/gdmvWHemi/0dgbBx8X4Ark3g1NV3X4qQRheEcjXH4=
+    template:
+      - "The Libra Project Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} by %{author} %{result} in %{duration}. Thanks for the contribution."
+  email:  
+    recipients:  
+    - ec-research@ge.com
+    on_success: always  
+    on_failure: always
