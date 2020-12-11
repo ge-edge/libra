@@ -12,7 +12,7 @@ import (
 
 func init(){
 
-	util.Init("agent",true)
+	//util.Init("agent",true)
 }
 
 //export ValidateToken
