@@ -5,7 +5,9 @@
 #include <iostream>
 #include <string>
 #include "libra.h"
+
 #include "crypto.h"
+
 #include "httplib.h"
 
 using namespace httplib;
@@ -23,7 +25,7 @@ void agent() {
   printf("%s, size: %d\n", m, n);
   //GoString tkn = {m, n};
   char *plain = ValidateToken(m);
-  printf("return %s, with length %d\n", plain, strlen(plain));
+  printf("return %s, with length %d\n", plain, (int) strlen(plain));
 }
 
 void hello() {
