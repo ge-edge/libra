@@ -14,13 +14,29 @@ jobs:
     #env:
     steps:
       - uses: actions/checkout@v2
-      - name: bootstrap reiwa
-        id: bootstrap
+      - uses: actions/setup-go@v2
+        with:
+          stable: 'true'
+          go-version: '1.16.0'
+      - name: test reiwa build
+        id: reiwa-build
         #env:
         run: |
-          - mkdir build && cd build
-          - cmake ./../ && make && ls -la ./test && make install
-          - ./install/bin/libra & curl localhost:8080/index
+          export COMMON_ROOT=$(pwd)
+          echo $COMMON_ROOT
+          ln -s $COMMON_ROOT/lib/linux/crypto.so $COMMON_ROOT/test/libcrypto.so
+          mkdir build && cd build
+          cmake ./../
+          make VERBOSE=1
+          ./test/libra & curl -o - localhost:8080/index
+          #./test/libra && make install
+          #./install/bin/libra & curl -o - localhost:8080/index
+        continue-on-error: true
+      - name: ci report
+        id: report
+        run: |
+          tree ./       
+          #cat build/CMakeFiles/CMakeError.log
       - name: pr merged
         if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
         id: pr-merged

@@ -3,7 +3,7 @@
 #
 cmake_minimum_required(VERSION 3.9)
 project(${CMAKE_PROJECT_NAME}-wzlib)
-find_library(golang REQUIRED)
+#find_library(golang REQUIRED)
 
 set(TARGET lib)
 set(GOPATH ${CMAKE_CURRENT_BINARY_DIR})
