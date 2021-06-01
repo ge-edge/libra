@@ -71,6 +71,10 @@ extern "C" {
 
 extern char* ValidateToken(char* p0);
 
+extern char* GeneratePassphrase();
+
+extern void RefreshPassphrase();
+
 #ifdef __cplusplus
 }
 #endif
