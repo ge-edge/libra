@@ -44,7 +44,7 @@ api:*/
 
 	ep,err:=util.GeneratePassphrase("api")
 	if err!=nil{
-		util.ErrLog(err)
+		util.GetCLog().ErrLog(err)
 		return nil
 	}
 	return C.CString(ep)
