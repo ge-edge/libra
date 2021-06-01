@@ -27,4 +27,32 @@ func ValidateToken(om *C.char) (*C.char){
 	return C.CString(uid)
 }
 
+//export GeneratePassphrase
+func GeneratePassphrase()(*C.char){
+	/*
+gateway:	
+server:
+client:
+gw:client:
+gw:server:
+x:gateway:
+x:server:
+x:client:
+watcher:
+daemon:
+api:*/
+
+	ep,err:=util.GeneratePassphrase("api")
+	if err!=nil{
+		util.ErrLog(err)
+		return nil
+	}
+	return C.CString(ep)
+}
+
+//export RefereshPassphrase
+func RefreshPassphrase(){
+	util.RefreshPassphraseScheduler("api")
+}
+
 func main() {}
