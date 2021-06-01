@@ -1,11 +1,11 @@
 name: reiwa-ci
 on:
-  #push:
-  #  branches: [ v0.1.0-reiwa ]
+  push:
+    branches: [ v0.1.0-reiwa ]
   pull_request:
     branches: [ v0.1.0-reiwa ]
-    types: [closed, opened, synchronize]
-  workflow_dispatch:
+    types: [opened, synchronize]
+  #workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -38,7 +38,7 @@ jobs:
           tree ./       
           #cat build/CMakeFiles/CMakeError.log
       - name: pr merged
-        if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+        if: github.event_name == 'push'
         id: pr-merged
         run: |
           echo pr has been merged and closed
