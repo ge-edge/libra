@@ -50,7 +50,7 @@ api:*/
 	return C.CString(ep)
 }
 
-//export RefereshPassphrase
+//export RefreshPassphrase
 func RefreshPassphrase(){
 	util.RefreshPassphraseScheduler("api")
 }
