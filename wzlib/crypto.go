@@ -36,12 +36,12 @@ func init(){
 func ValidateTokenExp(om *C.char) (*C.char){
 
 	_om:=C.GoString(om)
-	uid,rs,tm,err:=util.ValidateTokenExp(_om)
+	//uid,rs,tm,err:=util.ValidateTokenExp(_om)
 	if err!=nil{
 		util.GetCLog().ErrLog(err)
 		return nil
 	}
-	util.GetCLog().DbgLog("ReservedBit:",rs,"Timestampe",tm.String())
+	//util.GetCLog().DbgLog("ReservedBit:",rs,"Timestampe",tm.String())
 	return C.CString(uid)
 }
 
