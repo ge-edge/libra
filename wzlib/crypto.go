@@ -29,6 +29,7 @@ api:*/
 func init(){
 	
 	l:=util.NewAppLog(L_MODE)
+	l.SetDebug()
 	util.SetCLog(*l)
 }
 
