@@ -10,9 +10,26 @@ import (
 	"C"
 )
 
-func init(){
+const {
+	/*
+gateway:	
+server:
+client:
+gw:client:
+gw:server:
+x:gateway:
+x:server:
+x:client:
+watcher:
+daemon:
+api:*/
+	L_MODE = "api"
+}
 
-	//util.Init("agent",true)
+func init(){
+	
+	l:=util.NewAppLog(L_MODE)
+	util.SetCLog(*l)
 }
 
 //export ValidateToken
@@ -29,20 +46,8 @@ func ValidateToken(om *C.char) (*C.char){
 
 //export GeneratePassphrase
 func GeneratePassphrase()(*C.char){
-	/*
-gateway:	
-server:
-client:
-gw:client:
-gw:server:
-x:gateway:
-x:server:
-x:client:
-watcher:
-daemon:
-api:*/
 
-	ep,err:=util.GeneratePassphrase("api")
+	ep,err:=util.GeneratePassphrase(L_MODE)
 	if err!=nil{
 		util.GetCLog().ErrLog(err)
 		return nil
@@ -52,7 +57,7 @@ api:*/
 
 //export RefreshPassphrase
 func RefreshPassphrase(){
-	util.RefreshPassphraseScheduler("api")
+	util.RefreshPassphraseScheduler(L_MODE)
 }
 
 func main() {}
