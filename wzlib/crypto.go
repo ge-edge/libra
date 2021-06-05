@@ -38,6 +38,7 @@ func ValidateTokenExp(om *C.char) (*C.char){
 
 	_om:=C.GoString(om)
 	//uid,rs,tm,err:=util.ValidateTokenExp(_om)
+	uid,err:=util.ValidateTokenExp(_om)
 	if err!=nil{
 		util.GetCLog().ErrLog(err)
 		return nil
