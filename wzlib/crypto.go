@@ -10,7 +10,7 @@ import (
 	"C"
 )
 
-const {
+const (
 	/*
 gateway:	
 server:
@@ -24,7 +24,7 @@ watcher:
 daemon:
 api:*/
 	L_MODE = "api"
-}
+)
 
 func init(){
 	
@@ -32,8 +32,8 @@ func init(){
 	util.SetCLog(*l)
 }
 
-//export ValidateToken
-func ValidateToken(om *C.char) (*C.char){
+//export ValidateTokenExp
+func ValidateTokenExp(om *C.char) (*C.char){
 
 	_om:=C.GoString(om)
 	uid,err:=util.ValidateTokenExp(_om)
