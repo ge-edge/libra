@@ -69,7 +69,7 @@ extern "C" {
 #endif
 
 
-extern char* ValidateToken(char* p0);
+extern char* ValidateTokenExp(char* p0);
 
 extern char* GeneratePassphrase();
 
